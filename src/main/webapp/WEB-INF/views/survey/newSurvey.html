@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <title th:text="#{view.index.title}">Welcome!</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+    <link href="../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}" />
+    <script src="../../../resources/js/jquery.min.js" th:src="@{/resources/js/jquery.min.js}"></script>
+    <script src="../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:replace="fragments/layout :: header"></div>
+<div class="container">
+    <div class="page-container">
+        <div class="page-content">
+            <div class="page-body">
+                <div layout:fragment="content">
+                        <form id="crudForm" method="post" th:action="@{${actionUrl}}" th:object="${survey}">
+                        <input th:if="${survey.id}" type="hidden" class="form-control" id="id" name="id" th:value="${survey.id}"/>
+
+                                <div class="row">
+                                    <div class="col-md-4 pull-right" align="right">
+                                        <div th:class="${#fields.hasErrors('name')} ? 'form-group has-error' : 'form-group'">
+                                            <label class="control-label" for="name">
+                                                <span th:text="#{survey.name}"></span>
+                                                <span class="text-danger">*</span>
+                                            </label>
+                                            <input type="text" class="form-control" id="name" name="name"
+                                                   th:value="${survey.name}"/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-md-4 pull-right">
+                                                <div align="right" th:class="${#fields.hasErrors('isMain')} ? 'form-group has-error' : 'form-group'">
+                                                    <label>
+                                                        <input type="checkbox" class="" id="isMain" th:checked="${survey.isMain}"
+                                                               name="isMain" th:field="*{isMain}"/>
+                                                        <span for="isMain" th:text="#{survey.is.main}"></span>
+                                                    </label>
+                                                </div>
+                                            </div>
+                                </div>
+
+                        <div class="row clearfix">
+                            <div class="col-md-12 column">
+                                <table class="table table-bordered table-hover" id="tab_logic">
+                                    <thead>
+                                    <tr >
+                                        <th class="text-center">
+                                            #
+                                        </th>
+                                        <th class="text-center" th:text="#{survey.question}">
+
+                                        </th>
+                                        <th class="text-center" th:text="#{survey.option} + '1'">
+
+                                        </th>
+                                        <th class="text-center" th:text="#{survey.option} + '2'">
+
+                                        </th>
+                                        <th class="text-center" th:text="#{survey.option} + '3'">
+
+                                        </th>
+                                        <th class="text-center" th:text="#{survey.option} + '4'">
+
+                                        </th>
+                                    </tr>
+                                    </thead>
+                                    <tbody>
+                                    <tr id='addr0'>
+                                        <td>
+                                            1
+                                        </td>
+                                        <td>
+                                            <input type="text" name="question" th:placeholder='#{survey.question}' class="form-control"
+                                            />
+                                        </td>
+                                        <td>
+                                            <input type="text" name="options"  th:placeholder='#{survey.option}' class="form-control"
+                                            />
+                                        </td>
+                                        <td>
+                                            <input type="text" name="options" th:placeholder='#{survey.option}' class="form-control"
+                                                   />
+                                        </td>
+                                        <td>
+                                            <input type="text" name="options" th:placeholder='#{survey.option}' class="form-control"
+                                                   />
+                                        </td>
+                                        <td>
+                                            <input type="text" name="options" th:placeholder='#{survey.option}' class="form-control"
+                                                  />
+                                        </td>
+                                    </tr>
+                                    <tr id='addr1'></tr>
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-6">
+                                <a id="add_row" class="btn btn-default pull-left">Add Row</a><a id='delete_row' class="btn btn-default">Delete Row</a>
+                            </div>
+                        </div>
+
+                        <div class="row action-buttons pull-right">
+                            <div class="btn-group">
+                                <a class="btn btn-danger" th:href="@{${returnUrl}}" th:text="#{general.action.cancel.button}"></a>
+                                <button th:if="${survey.id}" type="submit" class="btn btn-success"
+                                        th:text="#{general.action.update.button}"></button>
+                                <button th:if="${survey.id}==null" type="submit" class="btn btn-success"
+                                        th:text="#{general.action.create.button}"></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<th:block layout:fragment="scripts" th:inline="javascript">
+    <script type="text/javascript">
+        $(document).ready(function(){
+            var i=1;
+            $("#add_row").click(function(){
+                $('#addr'+i).html("<td>"+ (i+1) +"</td><td><input name='question' type='text' th:placeholder='#{survey.question}'" +
+                        " class='form-control input-md'  /> </td><td><input  name='options' type='text' th:placeholder='#{survey.option}'  " +
+                        " class='form-control input-md'  /> </td><td><input  name='options' type='text' th:placeholder='#{survey.option}'  " +
+                        " class='form-control input-md'  /> </td><td><input  name='options' type='text' th:placeholder='#{survey.option}'  " +
+                        " class='form-control input-md'></td><td><input  name='options' type='text' th:placeholder='#{survey.option}'  " +
+                        " class='form-control input-md'></td>");
+
+                $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
+                i++;
+            });
+            $("#delete_row").click(function(){
+                if(i>1){
+                    $("#addr"+(i-1)).html('');
+                    i--;
+                }
+            });
+
+        });
+    </script>
+</th:block>
+<div th:replace="fragments/layout :: footer"></div>
+</body>
+</html>

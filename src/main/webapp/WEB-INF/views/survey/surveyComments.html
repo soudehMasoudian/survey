@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.w3.org/1999/xhtml">
+<head>
+    <title th:text="#{view.index.title}">Welcome!</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+    <link href="../../../resources/css/core.css" rel="stylesheet" media="screen" th:href="@{/resources/css/core.css}" />
+    <script src="../../../resources/js/jquery.min.js" th:src="@{/resources/js/jquery.min.js}"></script>
+    <script src="../../../resources/js/bootstrap.min.js" th:src="@{/resources/js/bootstrap.min.js}"></script>
+</head>
+<body>
+<div th:replace="fragments/layout :: header"></div>
+<div class="container">
+    <section layout:fragment="content">
+        <div id="container">
+
+            <!-- Start: Put your contents here -->
+            <div class="row">
+                <div class="col-md-12" align="right">
+
+                    <!--/* Body Section*/-->
+                    <section id="content-body">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12 clearfix">
+                                    <div class="section-heading scrollpoint">
+
+                                        <!-- Start Data table -->
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="widget">
+                                                    <div class="widget-header transparent">
+                                                        <h2><strong th:utext="#{survey.view.comments}"></strong>
+                                                        </h2>
+                                                        <div class="additional-btn">
+                                                            <a href="#" class="hidden reload"><i class="icon-ccw-1"></i></a>
+                                                            <a href="#" class="widget-toggle"><i
+                                                                    class="icon-down-open-2"></i></a>
+                                                            <a href="#" class="widget-close"><i
+                                                                    class="icon-cancel-3"></i></a>
+                                                        </div>
+                                                    </div>
+                                                    <div class="widget-content">
+
+                                                        <div class="table-responsive" dir="rtl">
+                                                            <table data-sortable=""
+                                                                   class="table table-hover table-striped"
+                                                                   data-sortable-initialized="true">
+                                                                <!--<label class="control-label" for="comment">-->
+                                                                    <!--<span th:text="#{survey.comment}"></span>-->
+                                                                <!--</label>-->
+                                                                <tbody class="has-img segment stacked" th:each="comments : ${results}">
+                                                                <tr>
+                                                                    <div class="row">
+                                                                    <div class="col-md-12">
+                                                                    <div class="form-group">
+                                                                    <textarea class="form-control" id="comment" name="comment"
+                                                                    th:text="${comments.comment}"></textarea>
+                                                                    </div>
+                                                                    </div>
+                                                                    </div>
+
+                                                                </tr>
+                                                                </tbody>
+                                                            </table>
+                                                        </div>
+
+                                                    </div>
+                                                    <div class="data-table-toolbar">
+                                                        <div class="row">
+                                                            <div class="col-md-4">
+                                                            </div>
+
+                                                            <div class="col-md-8">
+                                                                <div class="toolbar-btn-action">
+                                                                    <a class="btn btn-default"
+                                                                       th:href="@{${returnUrl}}">
+                                                                        <span th:text="#{survey.return.button}"></span>
+                                                                        <i class="fa fa-plus-circle"></i></a>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <!-- Data Table End -->
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+                <div th:replace="fragments/layout :: footer"></div>
+</body>
+</html>

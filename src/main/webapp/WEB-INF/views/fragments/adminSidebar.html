@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <link href="../../../resources/css/bootstrap.min.css" rel="stylesheet" media="screen" th:href="@{/resources/css/bootstrap.min.css}"/>
+</head>
+<body>
+
+<div class="navbar navbar-right" th:fragment="sidebarFragment">
+    <div class="container">
+        <!--<div class="span3 bs-docs-sidebar">-->
+            <!--<ul class="nav nav-list bs-docs-sidenav affix">-->
+                <!--<li><a th:href="@{newSurvey}" id="newSurvey"></i>نظرسنجی جدید</a></li>-->
+                <!--<li><a th:href="@{surveyList}" id="surveyList"></i>لیست نظرسنجی ها</a></li>-->
+            <!--</ul>-->
+        <!--</div>-->
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="sidebar-nav-fixed affix">
+                        <div class="well">
+                            <ul class="nav ">
+                                <!--<li class="nav-header" align="center">منو</li>-->
+                                <li><a th:href="@{newSurvey}" id="newSurvey"></i>نظرسنجی جدید</a></li>
+                                <li><a th:href="@{surveyList}" id="surveyList"></i>لیست نظرسنجی ها</a></li>
+                            </ul>
+                        </div>
+                        <!--/.well -->
+                    </div>
+                    <!--/sidebar-nav-fixed -->
+                </div>
+            </div>
+            <!--/row-->
+
+        </div>
+        <!--/.fluid-container-->
+    </div>
+</div>
+
+</body>
+</html>
